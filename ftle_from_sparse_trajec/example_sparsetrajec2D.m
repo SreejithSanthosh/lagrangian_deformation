@@ -24,7 +24,10 @@ yf = squeeze(r_t(:,:,2,end));
 
 delta = 0.03; % The spatial averaging parameter 
 r0 = [x0(:),y0(:)]; rf = [xf(:),yf(:)];
-[sv_list,vec0_list] = compute_deform_euclidean(r0,rf,delta);
+Anoise= 0.05;  % Add noise to the advected tracks
+rf = rf+Anoise*randn(size(rf));
+
+[sv_list,vec0_list] = compute_deform_sparsetrajec(r0,rf,delta);
 
 %% Visualize the result
 figure('Position',[1583 536 675 547])
